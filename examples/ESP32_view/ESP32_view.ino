@@ -55,7 +55,6 @@ void setup() {
     ESPDash.init(server);   
     
     // add event handlers
-    ESPDash.attachButtonClick(btnCallback);
     ESPDash.attachSliderChanged(sldCallback);
 
     
