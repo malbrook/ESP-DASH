@@ -1,79 +1,83 @@
 <template>
-  <!-- Temperature Card -->
-  <div class="column is-2">
-    <div class="card">
-      <span class="dot" :class="{'active': activity}"></span>
-      <div class="card-content">
-        <header>
-          <h5>{{name}}</h5>
-        </header>
-        <Br />
-        <p>
-          <x-circle-icon v-if="value == 0"></x-circle-icon>
-          <check-circle-icon class="active" v-else-if="value == 1"></check-circle-icon>
-          <alert-octagon-icon class="danger" v-else-if="value == 2"></alert-octagon-icon>
-          <pause-circle-icon class="warning" v-else-if="value == 3"></pause-circle-icon>
-        </p>
+    <!-- 
+    # Alert Card - display icon and a user message 
+    # Made by Malcolm Brook
+    # GitHub Profile: https://github.com/malbrook
+    # Based on  
+    -->
+    <div class="column is-2">
+      <div class="card">
+        <span class="dot" :class="{'active': activity}"></span>
+        <div class="card-content">
+          <header><h5>{{name}}</h5></header>
+          <Br/>
+          <p>
+          
+            <ok-check-icon class="active" v-if="value == 0"></ok-check-icon>                    // all clear
+            <alert-octagon-icon class="warning" v-else-if="value == 1"></alert-octagon-icon>    // minor problem, auto recover
+            <alert-triangle-icon class="alert" v-else-if="value == 2"></alert-triangle-icon>   // severe problem needs user intervention
+            <x-icon class="danger" v-else-if="value == 3"></x-icon>                            // program error  report to support
+            <span>{message}</span>
+          </p>
+        </div>
       </div>
     </div>
-  </div>
 </template>
 
 <script>
-  import {
-    CheckCircleIcon,
-    XCircleIcon,
-    AlertOctagonIcon,
-    PauseCircleIcon
-  } from 'vue-feather-icons';
+import { CheckCircleIcon, XCircleIcon, AlertOctagonIcon, PauseCircleIcon } from 'vue-feather-icons';
 
-  export default {
-    props: ['name', 'value'],
-    components: {
-      CheckCircleIcon,
-      XCircleIcon,
-      AlertOctagonIcon,
-      PauseCircleIcon
+export default {
+    props:['name', 'value', 'message'],
+    components:{
+        OkCheckIcon,
+        AlertOctagonIcon,
+        AlertTriangleIcon,
+        XIcon
     },
 
-    data() {
-      return {
+    data(){
+      return{
         activity: true
       }
     },
-    watch: {
-      value: function () {
+
+    watch: { 
+        value: function() {
         this.activity = true;
-        setTimeout(() => {
-          this.activity = false
-        }, 100);
+        setTimeout(() => {this.activity = false}, 100);
       }
     },
 
-    mounted() {
-      setTimeout(() => {
-        this.activity = false
-      }, 500);
+    mounted(){
+      setTimeout(() => { this.activity = false }, 500);
     }
-  }
+}
 </script>
 
 <style scoped>
-  .card svg {
-    width: 64px;
-    height: 64px;
-    color: grey;
-  }
+.card svg{
+  width: 64px;
+  height: 64px;
+  color:grey;
+}
 
-  .card svg.active {
-    color: chartreuse;
-  }
+.card svg.active{
+  color:green;
+}
 
-  .card svg.danger {
-    color: crimson;
-  }
+.card svg.warning{
+  color: rgb(221, 221, 59);
+}
+.card svg.alert{
+  color: rgb(239, 133, 26);
+}
 
-  .card svg.warning {
-    color: rgb(221, 221, 59);
-  }
+
+.card svg.danger{
+ color: rgb(211, 44, 46);
+}
+
+
+
 </style>

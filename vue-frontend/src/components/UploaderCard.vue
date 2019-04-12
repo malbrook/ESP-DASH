@@ -1,8 +1,10 @@
 <template>
-    <!-- Slider Card -->
-     <!-- Made by Malcolm Brook -->
-     <!-- GitHub Profile: https://github.com/malbrook -->
-     <!-- Based on 'vue-slider-component' by NightCatSama https://github.com/NightCatSama -->
+    <!-- 
+    # uploader Card
+    # Made by Malcolm Brook
+    # GitHub Profile: https://github.com/malbrook
+    # Based on  
+    -->
     <div class="column is-2">
         <div class="card">
             <header><h5>{{name}}</h5></header>
